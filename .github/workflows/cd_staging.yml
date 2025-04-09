@@ -1,0 +1,22 @@
+name: Deploy to staging
+on:
+    push:
+        branches:
+            - "main"
+
+jobs:
+    redeploy_everything:
+        name: Deploying everything to the staging cluster
+        runs-on: utuntu-latest
+
+        steps:
+            - name: SSH into server
+              run: |
+                echo ${{ secrets.AWS_PEM_KEY }} &> ~/ssh_key
+                ssh -i ~/ssh_key ubuntu@16.171.169.26
+                cd devops-practice && git pull
+                pnpm install
+                pnpm run build
+                pm2 restart fe-server
+                pm2 restart http-server
+                pm2 restart ws-server
