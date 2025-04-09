@@ -23,12 +23,11 @@ jobs:
 
             - name: SSH and deploy
               run: |
-                ssh -i ~/ssh_key -o StrictHostKeyChecking=no ubuntu@16.171.169.26 << 'EOF'
-                    cd devops-practice
-                    git pull
-                    pnpm install
-                    pnpm run build
-                    pm2 restart fe-server
-                    pm2 restart http-server
-                    pm2 restart ws-server
-                EOF    
+                ssh -i ~/ssh_key -o StrictHostKeyChecking=no ubuntu@16.171.169.26
+                cd devops-practice
+                git pull
+                pnpm install
+                pnpm run build
+                pm2 restart fe-server
+                pm2 restart http-server
+                pm2 restart ws-server    
