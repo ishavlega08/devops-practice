@@ -27,7 +27,7 @@ jobs:
                     export NVM_DIR=\$HOME/.nvm
                     source \$NVM_DIR/nvm.sh
                     cd devops-practice
-                    git pull
+                    git pull origin main
                     pnpm install
                     pnpm run build
                     pm2 restart fe-server
